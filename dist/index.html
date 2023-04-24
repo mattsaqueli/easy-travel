@@ -29,14 +29,25 @@
           <button class="estimate-button">Estimate Cost</button>
           <p class="estimate-cost"></p>
             <button class="confirm-button button">Confirm trip</button> 
-
         </form> 
       </section>    
     </nav>
   </header>
+  <div>
+    <h1 class="top-bar login-header" id="loginHeader">
+      <img class="logo" src="./images/EASY-TRAVEL.png" alt="easy travel agency logo of a plane">
+    </h1>
+  </div>
   <main class="main-body">
+    <form id="login">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+      <button id="loginBtn">Sign in</button>
+    </form>
     <section class="grid-container">
-      <article class="past-cards">
+      <article class="past-cards hidden">
         <h1 class="past">Past Trips</h1>
       </article>
       <article class="pending-cards hidden">
