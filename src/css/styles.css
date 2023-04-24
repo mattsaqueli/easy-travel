@@ -16,17 +16,13 @@
   margin-left: 15px;
 }
 
-.greeting {
-  margin-left: 150px
-}
-
 .cost {
   display: flex;
   justify-content: flex-end;
-  margin-right: 50px;
   border: 1px solid white;
   padding:20px;
   margin: 20px;
+  font-size: 15px;
 }
 
 .select-container, .button {
@@ -35,19 +31,20 @@
 }
 
 .button {
+  font-weight: bold;
   font-size: 20px;
   border: 1px solid black;
   background-color: white;
 }
 
 .button:hover {
-  color: white
+  background-color: rgb(145, 184, 129);
 }
 
 .user {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 20%;
   width: 100vw;
@@ -55,18 +52,16 @@
 
 .logo{
   width: 150px;
-  padding-left: 50px
 }
 
 .lower-bar {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
   font-size: 18px;
   width: 100vw;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .post-form {
@@ -77,14 +72,13 @@
   padding-left: 15px;
   width: 100%;
   justify-content: space-between;
+  border-top: 1px solid white;
 }
 
-
-.buttons {
+.btn-area{
   display: flex;
-  flex-direction: row;
-  padding-left: 20px;
-  width: 100vw;
+  justify-content: center;
+  padding-top: 50px
 }
 
 .grid-container {
