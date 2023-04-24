@@ -31,7 +31,12 @@ const inputForm = document.querySelector('.post-form');
 
 // -------------------------------- EVENT LISTNERS -------------------------------- //
 
-window.addEventListener('load', function () {
+window.addEventListener('load', getData);
+estimateBtn.addEventListener('click', getTripEstimateCost);
+
+// -------------------------------- FUNCTIONS -------------------------------- //
+
+function getData() {
   Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
   .then(data => {
     travelers = new Traveler(data[0].travelers);
@@ -42,9 +47,7 @@ window.addEventListener('load', function () {
   .then(() => {
     travelers.getTraveler(currUserID)
   });
-});
-estimateBtn.addEventListener('click', getTripEstimateCost);
-// -------------------------------- FUNCTIONS -------------------------------- //
+};
 
 function loadDOM() {
   displayCurrUser();
@@ -52,6 +55,7 @@ function loadDOM() {
   displayPendingTrips();
   displayTotalCost();
   displayCalendarInput();
+  populateDestinations(destinations);
 }
 
 function displayCurrUser() {
@@ -113,15 +117,22 @@ function displayCalendarInput() {
   dateInput.innerHTML = `<input id="dateInput" type="date" min="${currDate.split('/').join('-')}" name="date" required>`;
 }
 
+function populateDestinations(destinations) {
+  destinations.destinationData.forEach(destination => {
+    destinationInput.innerHTML += `<option id="${destination.id}" value="${destination.id}">${destination.destination}</option>`
+  })
+}
+
+
 function getTripEstimateCost(event) {
   event.preventDefault()
   const convert = Intl.NumberFormat('en-us')
   if (durationInput.value && TravelerInput.value && destinationInput.value) {
-    let total = destinations.calculateCost(parseInt(destinationInput.value), parseInt(TravelerInput.value), parseInt(durationInput.value))
+    let total = destinations.getCost(parseInt(destinationInput.value), parseInt(TravelerInput.value), parseInt(durationInput.value))
     total = convert.format(total)
-    costEstimate.innerText = `Estimated trip cost: $${total}`
+    estimateCost.innerText = `Estimated trip cost: $${total}`
   } else {
-    alert("Please fill out all of the forms before estimating a cost.")
+    alert("Please fill out all input fields.")
   }
 }
 
