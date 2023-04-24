@@ -9,7 +9,7 @@ class Destination {
 
   getCost(Id, travelers, duration) {
     const destination = this.getDestination(Id)
-    const totalWithAgentFee = Math.round((destination.estimatedLodgingCostPerDay * duration + destination.estimatedFlightCostPerPerson * travelers) * 0.1)
+    const totalWithAgentFee = Math.round((destination.estimatedLodgingCostPerDay * duration + destination.estimatedFlightCostPerPerson * travelers) * 1.1)
     return totalWithAgentFee;
   };
 };
