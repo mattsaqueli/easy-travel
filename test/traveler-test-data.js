@@ -1,4 +1,4 @@
-const travelerData = [
+const travelersData = [
   {
     "id":44,
     "name":"Marijo MacNeilley",
@@ -26,4 +26,4 @@ const travelerData = [
   }
 ];
 
-export default travelerData;
+export default travelersData;
