@@ -43,7 +43,7 @@ window.addEventListener('load', function () {
     travelers.getTraveler(currUserID)
   });
 });
-
+estimateBtn.addEventListener('click', getTripEstimateCost);
 // -------------------------------- FUNCTIONS -------------------------------- //
 
 function loadDOM() {
@@ -51,6 +51,7 @@ function loadDOM() {
   displayPastTrips();
   displayPendingTrips();
   displayTotalCost();
+  displayCalendarInput();
 }
 
 function displayCurrUser() {
@@ -106,6 +107,22 @@ function displayTotalCost() {
   total = convert.format(total)
   travelTotal.innerText = `Total travel cost: $${total}`
   console.log(total)
+}
+
+function displayCalendarInput() {
+  dateInput.innerHTML = `<input id="dateInput" type="date" min="${currDate.split('/').join('-')}" name="date" required>`;
+}
+
+function getTripEstimateCost(event) {
+  event.preventDefault()
+  const convert = Intl.NumberFormat('en-us')
+  if (durationInput.value && TravelerInput.value && destinationInput.value) {
+    let total = destinations.calculateCost(parseInt(destinationInput.value), parseInt(TravelerInput.value), parseInt(durationInput.value))
+    total = convert.format(total)
+    costEstimate.innerText = `Estimated trip cost: $${total}`
+  } else {
+    alert("Please fill out all of the forms before estimating a cost.")
+  }
 }
 
 
