@@ -9,7 +9,7 @@ import { fetchData } from './apiCalls';
 
 // -------------------------------- GLOBAL -------------------------------- //
 
-let currUserID = 1;
+let currUserID = 7;
 let date = new Date();
 let currDate = date.getFullYear() + "/" + ("0" + (date.getMonth()+1)).slice(-2) + "/"+ ("0" + date.getDate()).slice(-2);
 let trips, travelers, destinations;
@@ -34,7 +34,7 @@ window.addEventListener('load', getData);
 estimateBtn.addEventListener('click', getTripEstimateCost);
 
 inputForm.addEventListener('submit', (event) => {
-  event.preventDefault()
+  event.preventDefault();
   
   fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
@@ -54,9 +54,10 @@ inputForm.addEventListener('submit', (event) => {
   })
   .then(res => res.json())
   .then(data => {
-    getData()
+    console.log(data)
+    getData();
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
   durationInput.value = '';
   TravelerInput.value = '';
@@ -75,8 +76,9 @@ function getData() {
     loadDOM();
   })
   .then(() => {
-    travelers.getTraveler(currUserID)
-  });
+    travelers.getTraveler(currUserID);
+  })
+  .catch(err => console.log(err));
 };
 
 function loadDOM() {
@@ -86,35 +88,36 @@ function loadDOM() {
   displayTotalCost();
   displayCalendarInput();
   populateDestinations(destinations);
-}
+};
 
 function displayCurrUser() {
-  traveler.innerText = `Welcome back, ${travelers.getTraveler(currUserID).name.split(' ')[0]}!`
-}
+  traveler.innerText = `Welcome back, ${travelers.getTraveler(currUserID).name.split(' ')[0]}!`;
+};
 
 function displayPastTrips() {
-  const displayPastTrips = trips.getPastTrips(currUserID)
+  const displayPastTrips = trips.getPastTrips(currUserID);
   displayPastTrips.forEach(trip => {
-    const destinationDisplay = destinations.getDestination(trip.destinationID)
+    const destinationDisplay = destinations.getDestination(trip.destinationID);
     pastTrips.innerHTML +=   
-    `
-      <header class="card-top">
-        <img class="location-img" src="${destinationDisplay.image}" alt="${destinationDisplay.alt}" width="300px" height="200px">
-      </header>
-      <main class="card-middle">
-        <p>${destinationDisplay.destination}</p>
-      </main>
-      <footer class="card-bottom">
-        <p>${trip.date}</p>
-      </footer>
-    `
-  }) 
-}
+    ` <section class="user-card"
+        <header class="card-top">
+          <img class="location-img" src="${destinationDisplay.image}" alt="${destinationDisplay.alt}" width="300px" height="200px">
+        </header>
+        <main class="card-middle">
+          <p>${destinationDisplay.destination}</p>
+        </main>
+        <footer class="card-bottom">
+          <p>${trip.date}</p>
+        </footer>
+      </section>
+    `;
+  }); 
+};
 
 function displayPendingTrips() {
-  const displayPendingTrips = trips.getPendingTrips(currUserID)
+  const displayPendingTrips = trips.getPendingTrips(currUserID);
   displayPendingTrips.forEach(trip => {
-    const destinationDisplay = destinations.getDestination(trip.destinationID)
+    const destinationDisplay = destinations.getDestination(trip.destinationID);
     pendingTrips.innerHTML +=   
     `
       <header class="card-top">
@@ -127,42 +130,42 @@ function displayPendingTrips() {
         <p>${trip.date}</p>
       </footer>
     `
-  }) 
-}
+  });
+};
 
 function displayTotalCost() {
-  const convert = Intl.NumberFormat('en-us')
-  const displayPast = trips.getPastTrips(currUserID)
+  const convert = Intl.NumberFormat('en-us');
+  const displayPast = trips.getPastTrips(currUserID);
   let total = displayPast.reduce((total, trip) => {
-    total += destinations.getCost(trip.destinationID, trip.travelers, trip.duration)
-    return total
-  }, 0)
-  total = convert.format(total)
-  travelTotal.innerText = `Total travel cost: $${total}`
-}
+    total += destinations.getCost(trip.destinationID, trip.travelers, trip.duration);
+    return total;
+  }, 0);
+  total = convert.format(total);
+  travelTotal.innerText = `Total travel cost: $${total}`;
+};
 
 function displayCalendarInput() {
-  dateInput.innerHTML = `<input id="dateInput" type="date" min="${currDate.split('/').join('-')}" name="date" required>`;
-}
+  dateInput.innerHTML = `<label for="date">Date:<input id="dateInput" type="date" min="${currDate.split('/').join('-')}" name="date" required></label>`;
+};
 
 function populateDestinations(destinations) {
   destinations.destinationData.forEach(destination => {
-    destinationInput.innerHTML += `<option id="${destination.id}" value="${destination.id}">${destination.destination}</option>`
-  })
-}
+    destinationInput.innerHTML += `<option id="${destination.id}" value="${destination.id}">${destination.destination}</option>`;
+  });
+};
 
 
 function getTripEstimateCost(event) {
-  event.preventDefault()
-  const convert = Intl.NumberFormat('en-us')
+  event.preventDefault();
+  const convert = Intl.NumberFormat('en-us');
   if (durationInput.value && TravelerInput.value && destinationInput.value) {
-    let total = destinations.getCost(parseInt(destinationInput.value), parseInt(TravelerInput.value), parseInt(durationInput.value))
-    total = convert.format(total)
-    estimateCost.innerText = `Estimated trip cost: $${total}`
+    let total = destinations.getCost(parseInt(destinationInput.value), parseInt(TravelerInput.value), parseInt(durationInput.value));
+    total = convert.format(total);
+    estimateCost.innerText = `Estimated trip cost: $${total}`;
   } else {
-    alert("Please fill out all input fields.")
-  }
-}
+    alert("Please fill out all input fields.");
+  };
+};
 
 
 
