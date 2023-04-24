@@ -4,13 +4,45 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Easy-Travel</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <header class="top-bar hidden">
+    <section class="user">
+      <h1 class="page-title">Easy Travel</h1>
+      <p class="greeting">Welcome, user.</p>
+      <div class="cost">Total travel cost: $total</div>
+    </section>
+    <nav class="lower-bar">
+      <section>
+        <form class="post-form">
+          <label for="date">Date:</label><br>
+          <div id="date"></div>
+          <label for="duration">Duration:</label><br>
+          <input class="input" type="number" id="duration" min="1" max="30" required>
+          <label for="travelers">Number of Travelers:</label>
+          <input class="input" type="number" id="travelers" min="1" max="20" required>
+          <label for="destination">Destination:</label>
+          <select id="destination" class="input">
+            <option></option>
+          </select>
+          <button class="estimate">Estimate Cost</button>
+          <p class="estimate-cost">Estimated Trip Cost: </p>
+          <button class="button">Confirm trip</button> 
+        </form> 
+      </section>    
+    </nav>
+  </header>
+  <main class="main-body">
+    <section class="grid-container">
+      <article class="travel-card-past">
+        <h1 class="past">Past Trips</h1>
+      </article>
+      <article class="travel-card-pending hidden">
+        <h1 class="pending">Pending Trips</h1>
+      </article> 
+    </section>
+  </main>
   <script src="bundle.js"></script>
-
 </body>
 </html>
