@@ -49,6 +49,8 @@ window.addEventListener('load', function () {
 function loadDOM() {
   displayCurrUser();
   displayPastTrips();
+  displayPendingTrips();
+  displayTotalCost();
 }
 
 function displayCurrUser() {
@@ -57,7 +59,6 @@ function displayCurrUser() {
 
 function displayPastTrips() {
   const displayPastTrips = trips.getPastTrips(currUserID)
-  console.log(pastTrips)
   displayPastTrips.forEach(trip => {
     const destinationDisplay = destinations.getDestination(trip.destinationID)
     pastTrips.innerHTML +=   
@@ -74,4 +75,38 @@ function displayPastTrips() {
     `
   }) 
 }
+
+function displayPendingTrips() {
+  const displayPendingTrips = trips.getPendingTrips(currUserID)
+  console.log(displayPendingTrips)
+  displayPendingTrips.forEach(trip => {
+    const destinationDisplay = destinations.getDestination(trip.destinationID)
+    pendingTrips.innerHTML +=   
+    `
+      <header class="card-top">
+        <img class="location-img" src="${destinationDisplay.image}" alt="${destinationDisplay.alt}" width="300px" height="200px">
+      </header>
+      <main class="card-middle">
+        <p>${destinationDisplay.destination}</p>
+      </main>
+      <footer class="card-bottom">
+        <p>${trip.date}</p>
+      </footer>
+    `
+  }) 
+}
+
+function displayTotalCost() {
+  const convert = Intl.NumberFormat('en-us')
+  const displayPast = trips.getPastTrips(currUserID)
+  let total = displayPast.reduce((total, trip) => {
+    total += destinations.getCost(trip.destinationID, trip.travelers, trip.duration)
+    return total
+  }, 0)
+  total = convert.format(total)
+  travelTotal.innerText = `Total travel cost: $${total}`
+  console.log(total)
+}
+
+
 

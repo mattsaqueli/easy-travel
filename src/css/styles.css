@@ -100,10 +100,17 @@ article {
   margin: 0;
   height: 800px;
   width: 400px;
-  border: 1px solid black;
-  border-radius: 5%;
+  border-top: 1px solid grey;
+  /* border: 1px solid black;
+  border-radius: 5%; */
   overflow: scroll;
   overflow-x: hidden;
+}
+
+article > h1 {
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .dest-img {
