@@ -45,13 +45,15 @@
 
 .button {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   border: 1px solid black;
   background-color: white;
 }
 
 .button:hover {
   background-color: rgb(145, 184, 129);
+  color: white;
+  cursor: pointer;
 }
 
 .user {
@@ -77,7 +79,7 @@
   margin-bottom: 50px;
 }
 
-.post-form {
+.form {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -88,10 +90,13 @@
   border-top: 1px solid white;
 }
 
-.btn-area{
+.estimate-button:hover{
+ cursor: pointer;
+}
+
+.confirm-button{
   display: flex;
   justify-content: center;
-  padding-top: 50px
 }
 
 .grid-container {
@@ -116,6 +121,8 @@ article {
   border-top: 1px solid grey;
   overflow: scroll;
   overflow-x: hidden;
+  border: 1px solid lightgray;
+  border-radius: 10px;
 }
 
 article > h1 {
@@ -124,9 +131,10 @@ article > h1 {
   margin-bottom: 20px;
 }
 
-.dest-img {
+.location-img {
   height: 200px;
   width: 300px;
+  border-radius: 10px;
 }
 
 .card-top {

@@ -9,11 +9,10 @@ import { fetchData } from './apiCalls';
 
 // -------------------------------- GLOBAL -------------------------------- //
 
-let currUserID = 7;
+let currUserID = 1;
 let date = new Date();
 let currDate = date.getFullYear() + "/" + ("0" + (date.getMonth()+1)).slice(-2) + "/"+ ("0" + date.getDate()).slice(-2);
 let trips, travelers, destinations;
-console.log(currDate)
 
 // -------------------------------- QUERY SELECTORS -------------------------------- //
 
@@ -27,12 +26,43 @@ const dateInput = document.querySelector('#date');
 const durationInput = document.querySelector('#duration');
 const TravelerInput = document.querySelector('#travelers');
 const destinationInput = document.querySelector('#destination');
-const inputForm = document.querySelector('.post-form');
+const inputForm = document.querySelector('.form');
 
 // -------------------------------- EVENT LISTNERS -------------------------------- //
 
 window.addEventListener('load', getData);
 estimateBtn.addEventListener('click', getTripEstimateCost);
+
+inputForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  
+  fetch('http://localhost:3001/api/v1/trips', {
+    method: 'POST',
+    body: JSON.stringify({
+      "id": parseInt(trips.tripData.length + 1),
+      "userID": currUserID,
+      "destinationID": parseInt(destinationInput.value),
+      "travelers": parseInt(TravelerInput.value),
+      "date": document.getElementById('dateInput').value.split('-').join('/'),
+      "duration": durationInput.value,
+      "status":"pending",
+      "suggestedActivities":[]
+    }), 
+    headers: {
+      'Content-Type': 'application/json'
+    }  
+  })
+  .then(res => res.json())
+  .then(data => {
+    getData()
+  })
+  .catch(err => console.log(err))
+
+  durationInput.value = '';
+  TravelerInput.value = '';
+  destinationInput.value = '';
+  estimateCost.innerText = '';
+})
 
 // -------------------------------- FUNCTIONS -------------------------------- //
 
@@ -83,7 +113,6 @@ function displayPastTrips() {
 
 function displayPendingTrips() {
   const displayPendingTrips = trips.getPendingTrips(currUserID)
-  console.log(displayPendingTrips)
   displayPendingTrips.forEach(trip => {
     const destinationDisplay = destinations.getDestination(trip.destinationID)
     pendingTrips.innerHTML +=   
@@ -110,7 +139,6 @@ function displayTotalCost() {
   }, 0)
   total = convert.format(total)
   travelTotal.innerText = `Total travel cost: $${total}`
-  console.log(total)
 }
 
 function displayCalendarInput() {
