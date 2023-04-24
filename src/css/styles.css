@@ -43,14 +43,16 @@
   background: none;
 }
 
-.button {
+.button, .estimate-button {
   font-weight: bold;
   font-size: 15px;
   border: 1px solid black;
   background-color: white;
+  border-style: none;
+  margin-left: 10px;
 }
 
-.button:hover {
+.estimate-button:hover, .button:hover {
   background-color: rgb(145, 184, 129);
   color: white;
   cursor: pointer;
@@ -88,15 +90,6 @@
   width: 100%;
   justify-content: space-between;
   border-top: 1px solid white;
-}
-
-.estimate-button:hover{
- cursor: pointer;
-}
-
-.confirm-button{
-  display: flex;
-  justify-content: center;
 }
 
 .grid-container {
