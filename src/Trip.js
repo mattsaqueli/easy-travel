@@ -7,8 +7,6 @@ class Trip {
     return this.tripData.filter(trip => trip.userID === userID && trip.status === 'approved');
   };
 
-  // all past trips are 'approved'
-
   getPendingTrips(userID) {
     const filterTrip = this.tripData.filter(trip => {
       if (trip.userID === userID && trip.status === 'pending') { 
@@ -17,6 +15,6 @@ class Trip {
     })
     return filterTrip;
   };
-}
+};
 
 export default Trip;
