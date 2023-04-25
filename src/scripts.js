@@ -161,7 +161,6 @@ function populateDestinations(destinations) {
   });
 };
 
-
 function getTripEstimateCost(event) {
   event.preventDefault();
   const convert = Intl.NumberFormat('en-us');
@@ -188,7 +187,7 @@ function grantAccess(event) {
     hide(loginHeader);
     hide(loginForm);
   } else if (userInput !== 'travel' || userInput < 1 || userInput > 50) {
-    alert('Please enter a valid username and password.')
+    alert('Please enter a valid username and password.');
   };
 };
 
