@@ -11,10 +11,10 @@ Run npm install.
 Run npm start.
 Copy and paste the local host (http://localhost:8080/) into your browser. 
 
-## Preview
-show preview here.
+## Preview:
+![a gif of how the Easy Travel app works](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTMyZGMzY2UzYjk1MzI5NjcwYTgyZDZhNzRmOGYzZTA5YTQ5Mzg5MyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/LZMIpRH6bORepfiRvS/giphy.gif)
 
-## Technologies
+## Technologies:
 JavaScript | Mocha/Chai | HTML | CSS | Figma 
 
 ## Contributors:
@@ -27,3 +27,11 @@ Mattheus Saqueli
 - Work with an API to send and receive data
 - Solidify the code review process
 - Create a robust test suite that thoroughly tests all functionality of a client-side application
+
+## Wins/Challenges:
+Win: Writing clean Javascript that other developers can understand. Using iterators methods efficiently after only 5 weeks of exposure to them.
+Challenges: One challenege I faced in this project was accessing and manipulating api data. Another challenege was writing tests that test both happy and sad paths while completing the project in time. 
+
+## Future Addition:
+- Add more happy and sad path tests
+- Add a Admin view where you can see all requested pending trips. Admin can then approve or deny the pending trips 
