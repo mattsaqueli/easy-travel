@@ -16,6 +16,12 @@ let trips, travelers, destinations;
 
 // -------------------------------- QUERY SELECTORS -------------------------------- //
 
+const loginForm = document.querySelector('#login');
+const login = document.querySelector('#loginBtn');
+const loginHeader = document.querySelector('#loginHeader');
+const username = document.querySelector('#username');
+const password = document.querySelector('#password');
+const topArea = document.querySelector('.top-bar')
 const estimateBtn = document.querySelector('.estimate-button');
 const estimateCost = document.querySelector('.estimate-cost')
 const pastTrips = document.querySelector('.past-cards');
@@ -32,6 +38,7 @@ const inputForm = document.querySelector('.form');
 
 window.addEventListener('load', getData);
 estimateBtn.addEventListener('click', getTripEstimateCost);
+login.addEventListener('click', grantAccess);
 
 inputForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -165,6 +172,32 @@ function getTripEstimateCost(event) {
   } else {
     alert("Please fill out all input fields.");
   };
+};
+
+function grantAccess(event) {
+  event.preventDefault();
+  let usernameInput = username.value;
+  let passwordInput = password.value;
+  let userInput = parseInt(usernameInput.replace('traveler', ''));
+  if( passwordInput = 'travel' && userInput >= 1 && userInput <= 50) {
+    currUserID = userInput;
+    loadDOM();
+    display(topArea);
+    display(pastTrips);
+    display(pendingTrips);
+    hide(loginHeader);
+    hide(loginForm);
+  } else if (userInput !== 'travel' || userInput < 1 || userInput > 50) {
+    alert('Please enter a valid username and password.')
+  };
+};
+
+function hide(area) {
+  area.classList.add('hidden');
+};
+
+function display(area) {
+  area.classList.remove('hidden');
 };
 
 
